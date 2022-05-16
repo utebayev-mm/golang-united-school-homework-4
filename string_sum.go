@@ -3,6 +3,7 @@ package string_sum
 import (
 	"errors"
 	"fmt"
+	"regexp"
 	"strconv"
 )
 
@@ -39,33 +40,13 @@ func StringSum(input string) (output string, err error) {
 	if spaceCounter == len(runeInput) || input == "" {
 		return "", fmt.Errorf("%s", errorEmptyInput)
 	}
-	sign1 := 1
-	sign2 := 1
-	var numbers []int
-	var indexes []int
 
-	for i := 0; i < len(runeInput); i++ {
-		if runeInput[i] <= '9' && runeInput[i] >= '0' {
-			number, _ := strconv.Atoi(string(runeInput[i]))
-			numbers = append(numbers, number)
-			indexes = append(indexes, i)
-		}
+	regexp := regexp.MustCompile(`[-]?\d[\d,]*[\.]?[\d{2}]*`)
+	numbers := regexp.FindAllString(input, -1)
+	result := 0
+	for i := 0; i < len(numbers); i++ {
+		number, _ := strconv.Atoi(numbers[i])
+		result += number
 	}
-	for i := 0; i < indexes[0]; i++ {
-		if runeInput[i] == '-' {
-			sign1 = -1
-		} else {
-			sign1 = 1
-		}
-	}
-
-	for i := indexes[0]; i < indexes[1]; i++ {
-		if runeInput[i] == '-' {
-			sign2 = -1
-			break
-		}
-	}
-	number1 := numbers[0] * sign1
-	number2 := numbers[1] * sign2
-	return strconv.Itoa(number1 + number2), nil
+	return strconv.Itoa(result), nil
 }
