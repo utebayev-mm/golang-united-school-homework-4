@@ -27,21 +27,21 @@ var (
 
 func StringSum(input string) (output string, err error) {
 	if input == "" {
-		return "", fmt.Errorf("error : %s", errorEmptyInput)
+		return "", fmt.Errorf("%s", errorEmptyInput)
 	}
 	spaceCounter := 0
 	runeInput := []rune(input)
 	for i := 0; i < len(runeInput); i++ {
 		if runeInput[i] != '-' && runeInput[i] != '+' && runeInput[i] != ' ' && (runeInput[i] > 57 || runeInput[i] < 48) {
-			return "", fmt.Errorf("error : %s", errorNotTwoOperands)
+			return "", fmt.Errorf("%s", errorNotTwoOperands)
 		}
 		if runeInput[i] == ' ' {
 			spaceCounter++
 		}
-
 	}
+
 	if spaceCounter == len(runeInput) || input == "" {
-		return "", fmt.Errorf("error : %s", errorEmptyInput)
+		return "", fmt.Errorf("%s", errorEmptyInput)
 	}
 
 	regexp := regexp.MustCompile(`[-]?\d[\d,]*[\.]?[\d{2}]*`)
@@ -56,7 +56,7 @@ func StringSum(input string) (output string, err error) {
 		arr = append(arr, number)
 	}
 	if len(arr) == 1 || len(arr) > 2 {
-		return "", fmt.Errorf("error : %s", errorNotTwoOperands)
+		return "", fmt.Errorf("%s", errorNotTwoOperands)
 	}
 	for i := 0; i < len(arr); i++ {
 		result += arr[i]
