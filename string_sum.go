@@ -26,14 +26,6 @@ var (
 // Use the errors defined above as described, again wrapping into fmt.Errorf
 
 func StringSum(input string) (output string, err error) {
-	if input == "" {
-		return "", fmt.Errorf("%s", errorEmptyInput)
-	}
-	_, err1 := strconv.Atoi(input)
-	if err1 == nil {
-		return "", fmt.Errorf("%s", errorNotTwoOperands)
-	}
-
 	spaceCounter := 0
 	runeInput := []rune(input)
 	for i := 0; i < len(runeInput); i++ {
@@ -60,7 +52,7 @@ func StringSum(input string) (output string, err error) {
 		}
 		arr = append(arr, number)
 	}
-	if len(arr) == 1 || len(arr) > 2 {
+	if len(arr) != 2 {
 		return "", fmt.Errorf("%s", errorNotTwoOperands)
 	}
 	for i := 0; i < len(arr); i++ {
