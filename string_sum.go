@@ -29,6 +29,11 @@ func StringSum(input string) (output string, err error) {
 	if input == "" {
 		return "", fmt.Errorf("%s", errorEmptyInput)
 	}
+	_, err1 := strconv.Atoi(input)
+	if err1 == nil {
+		return "", fmt.Errorf("%s", errorNotTwoOperands)
+	}
+
 	spaceCounter := 0
 	runeInput := []rune(input)
 	for i := 0; i < len(runeInput); i++ {
