@@ -56,7 +56,7 @@ func StringSum(input string) (output string, err error) {
 	for i := 0; i < len(numbers); i++ {
 		number, err := strconv.Atoi(numbers[i])
 		if err != nil {
-			return "", err
+			return "", fmt.Errorf("%s", err)
 		}
 		arr = append(arr, number)
 	}
