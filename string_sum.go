@@ -44,9 +44,13 @@ func StringSum(input string) (output string, err error) {
 	regexp := regexp.MustCompile(`[-]?\d[\d,]*[\.]?[\d{2}]*`)
 	numbers := regexp.FindAllString(input, -1)
 	result := 0
+	var arr []int
 	for i := 0; i < len(numbers); i++ {
 		number, _ := strconv.Atoi(numbers[i])
-		result += number
+		arr = append(arr, number)
+	}
+	for i := 0; i < len(arr); i++ {
+		result += arr[i]
 	}
 	return strconv.Itoa(result), nil
 }
