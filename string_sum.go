@@ -92,8 +92,15 @@ func StringSum(input string) (output string, err error) {
 	if sign2 == 0 {
 		sign2 = 1
 	}
+	if arr[0] < 0 {
+		arr[0] = arr[0] * -1
+	}
+	if arr[1] < 0 {
+		arr[1] = arr[1] * -1
+	}
 	arr[0] = arr[0] * sign1
 	arr[1] = arr[1] * sign2
+	fmt.Println(arr)
 
 	for i := 0; i < len(arr); i++ {
 		result += arr[i]
