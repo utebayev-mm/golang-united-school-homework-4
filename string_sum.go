@@ -30,10 +30,11 @@ func StringSum(input string) (output string, err error) {
 	runeInput := []rune(input)
 	for i := 0; i < len(runeInput); i++ {
 		if runeInput[i] != '-' && runeInput[i] != '+' && runeInput[i] != ' ' && (runeInput[i] > 57 || runeInput[i] < 48) {
-			number, err := strconv.Atoi(input)
+			_, err := strconv.Atoi(input)
 			if err != nil {
 				return "", fmt.Errorf("%w", err)
 			}
+
 			return "", fmt.Errorf("%w", errorNotTwoOperands)
 		}
 		if runeInput[i] == ' ' {
