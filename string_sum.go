@@ -34,7 +34,6 @@ func StringSum(input string) (output string, err error) {
 			if err != nil {
 				return "", fmt.Errorf("%w", err)
 			}
-
 			return "", fmt.Errorf("%w", errorNotTwoOperands)
 		}
 		if runeInput[i] == ' ' {
@@ -60,6 +59,42 @@ func StringSum(input string) (output string, err error) {
 	if len(arr) != 2 {
 		return "", fmt.Errorf("%w", errorNotTwoOperands)
 	}
+	var sign1, sign2 int
+	lastIndex := 0
+	for i := 0; i < len(runeInput); i++ {
+		if runeInput[i] == '-' {
+			sign1 = -1
+		}
+		if runeInput[i] <= 57 && runeInput[i] >= 48 {
+			lastIndex = i
+			break
+		}
+	}
+
+	for i := lastIndex; i < len(runeInput); i++ {
+		if runeInput[i] > 57 || runeInput[i] < 48 {
+			lastIndex = i
+			break
+		}
+	}
+	for i := lastIndex; i < len(runeInput); i++ {
+		if runeInput[i] == '-' {
+			sign2 = -1
+		}
+		if runeInput[i] <= 57 && runeInput[i] >= 48 {
+			lastIndex = i
+			break
+		}
+	}
+	if sign1 == 0 {
+		sign1 = 1
+	}
+	if sign2 == 0 {
+		sign2 = 1
+	}
+	arr[0] = arr[0] * sign1
+	arr[1] = arr[1] * sign2
+
 	for i := 0; i < len(arr); i++ {
 		result += arr[i]
 	}
